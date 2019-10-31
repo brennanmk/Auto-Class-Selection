@@ -7,8 +7,8 @@ driver.get("https://leopardweb.wit.edu")
 
 
 # Input login and requested CRN numbers
-username = "millerklugmanb"
-password = "#Bp02052"
+username = ""
+password = ""
 CRN1 = "22480"
 CRN2 = ""
 CRN3 = ""
