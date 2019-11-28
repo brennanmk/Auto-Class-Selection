@@ -2,9 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import emailer as mail
 
-# Change to cromedriver exe location
-
-
 # Input login
 username = "millerklugmanb"
 password = "#Bp02052"
@@ -33,17 +30,22 @@ third_CRN4 = ""
 third_CRN5 = ""
 third_CRN6 = ""
 
+#Initialize counter variables
+schedule1 = 1
+schedule2 = 1
+schedule3=1
+
+#Create driver
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(chrome_options=chrome_options)
 
+#navigate to leopardweb
 driver.get("https://leopardweb.wit.edu")
+#Startup console message
 print("Headless Driver Started")
-schedule1 = 1
-schedule2 = 1
-schedule3 = 1
 # Find username and enter username
 id_box = driver.find_element_by_name('username')
 id_box.send_keys(username)
@@ -57,7 +59,7 @@ login_button = driver.find_element_by_name('submit').click()
 student_button = driver.find_element_by_link_text('Student').click()
 
 # Navigate to registration
-student_button = driver.find_element_by_link_text('Registration').click()
+schedstudent_button = driver.find_element_by_link_text('Registration').click()
 
 # Navigate to select term
 sub_button = driver.find_element_by_link_text('Select Term').click()
@@ -68,6 +70,7 @@ button_button = driver.find_element_by_xpath("/html/body/div[3]/form/input[2]").
 # Navigate to Add Drop
 student_button = driver.find_element_by_link_text('Add or Drop Classes').click()
 
+#Loop to find first schedule
 while schedule1 <= 3:
     # Enter CRN numbers, adjust keys accordingly
     id_box = driver.find_element_by_id("crn_id1")
@@ -92,10 +95,10 @@ while schedule1 <= 3:
     submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
     if driver.page_source.find("Registration Add Errors"):
         schedule1 = schedule1 + 1
-        print("script has failed")
+        print("Schedule 1 has failed")
 
 if schedule1 >= 3:
-    print("Schedule 1 has failed moving on:")
+    print("Schedule 1 has failed to many times moving onto schedule 2:")
     while schedule2 <= 3:
         # Enter CRN numbers, adjust keys accordingly
         id_box = driver.find_element_by_id("crn_id1")
@@ -118,9 +121,9 @@ if schedule1 >= 3:
         submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
         if driver.page_source.find("Registration Add Errors"):
             schedule2 = schedule2 + 1
-            print("Schedule 2 script has failed")
+            print("Schedule 2 has failed")
     if schedule2 >= 3:
-        print("Schedule 2 has failed moving onto schedule 3:")
+        print("Schedule 2 has failed to many times moving onto schedule 3:")
         while schedule3 <= 3:
             # Enter CRN numbers, adjust keys accordingly
             id_box = driver.find_element_by_id("crn_id1")
@@ -143,9 +146,9 @@ if schedule1 >= 3:
             submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
             if driver.page_source.find("Registration Add Errors"):
                 schedule3 = schedule3 + 1
-                print("Schedule 3 script has failed")
+                print("Schedule 3 has failed")
         if schedule3 >= 3:
-            print("All schedules have failed")
+            print("ERROR: All schedules have failed, Sending warning email")
             mail.failure()
         else:
             print("Schedule 3 has succeeded")
