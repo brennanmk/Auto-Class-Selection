@@ -3,6 +3,36 @@ from selenium.webdriver.chrome.options import Options
 import emailer as mail
 
 # Change to cromedriver exe location
+
+
+# Input login
+username = "millerklugmanb"
+password = "#Bp02052"
+
+# Enter first CRN Schedule
+CRN1 = "22480"
+CRN2 = ""
+CRN3 = ""
+CRN4 = ""
+CRN5 = ""
+CRN6 = ""
+
+# Enter seceond set
+second_CRN1 = "22480"
+second_CRN2 = ""
+second_CRN3 = ""
+second_CRN4 = ""
+second_CRN5 = ""
+second_CRN6 = ""
+
+# Enter 3rd schedule is applicable
+third_CRN1 = "22480"
+third_CRN2 = ""
+third_CRN3 = ""
+third_CRN4 = ""
+third_CRN5 = ""
+third_CRN6 = ""
+
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
@@ -11,36 +41,9 @@ driver = webdriver.Chrome(chrome_options=chrome_options)
 
 driver.get("https://leopardweb.wit.edu")
 print("Headless Driver Started")
-counter = 1
-
-# Input login
-username = "millerklugmanb"
-password = "#Bp02052"
-
-#Enter first CRN Schedule
-CRN1 = "22480"
-CRN2 = ""
-CRN3 = ""
-CRN4 = ""
-CRN5 = ""
-CRN6 = ""
-
-#Enter seceond set
-2CRN1 = "22480"
-2CRN2 = ""
-2CRN3 = ""
-2CRN4 = ""
-2CRN5 = ""
-2CRN6 = ""  
-
-#Enter 3rd schedule is applicable
-3CRN1 = "22480"
-3CRN2 = ""
-3CRN3 = ""
-3CRN4 = ""
-3CRN5 = ""
-3CRN6 = ""
-
+schedule1 = 1
+schedule2 = 1
+schedule3 = 1
 # Find username and enter username
 id_box = driver.find_element_by_name('username')
 id_box.send_keys(username)
@@ -53,7 +56,7 @@ login_button = driver.find_element_by_name('submit').click()
 # Navigate to student
 student_button = driver.find_element_by_link_text('Student').click()
 
-# Navigate to regristration
+# Navigate to registration
 student_button = driver.find_element_by_link_text('Registration').click()
 
 # Navigate to select term
@@ -65,8 +68,7 @@ button_button = driver.find_element_by_xpath("/html/body/div[3]/form/input[2]").
 # Navigate to Add Drop
 student_button = driver.find_element_by_link_text('Add or Drop Classes').click()
 
-
-while counter <= 3:
+while schedule1 <= 3:
     # Enter CRN numbers, adjust keys accordingly
     id_box = driver.find_element_by_id("crn_id1")
     id_box.send_keys(CRN1)
@@ -89,12 +91,68 @@ while counter <= 3:
     # Final submit classes
     submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
     if driver.page_source.find("Registration Add Errors"):
-        counter = counter+1
+        schedule1 = schedule1 + 1
         print("script has failed")
 
-if counter >= 3:
-    print("Program has failed 3 times")
-    mail.failure()
+if schedule1 >= 3:
+    print("Schedule 1 has failed moving on:")
+    while schedule2 <= 3:
+        # Enter CRN numbers, adjust keys accordingly
+        id_box = driver.find_element_by_id("crn_id1")
+        id_box.send_keys(second_CRN1)
+
+        id_box = driver.find_element_by_id("crn_id2")
+        id_box.send_keys(second_CRN2)
+
+        id_box = driver.find_element_by_id("crn_id3")
+        id_box.send_keys(second_CRN3)
+
+        id_box = driver.find_element_by_id("crn_id4")
+        id_box.send_keys(second_CRN4)
+
+        id_box = driver.find_element_by_id("crn_id5")
+        id_box.send_keys(second_CRN5)
+
+        id_box = driver.find_element_by_id("crn_id6")
+        id_box.send_keys(second_CRN6)
+        submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
+        if driver.page_source.find("Registration Add Errors"):
+            schedule2 = schedule2 + 1
+            print("Schedule 2 script has failed")
+    if schedule2 >= 3:
+        print("Schedule 2 has failed moving onto schedule 3:")
+        while schedule3 <= 3:
+            # Enter CRN numbers, adjust keys accordingly
+            id_box = driver.find_element_by_id("crn_id1")
+            id_box.send_keys(third_CRN1)
+
+            id_box = driver.find_element_by_id("crn_id2")
+            id_box.send_keys(third_CRN2)
+
+            id_box = driver.find_element_by_id("crn_id3")
+            id_box.send_keys(third_CRN3)
+
+            id_box = driver.find_element_by_id("crn_id4")
+            id_box.send_keys(third_CRN4)
+
+            id_box = driver.find_element_by_id("crn_id5")
+            id_box.send_keys(third_CRN5)
+
+            id_box = driver.find_element_by_id("crn_id6")
+            id_box.send_keys(third_CRN6)
+            submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
+            if driver.page_source.find("Registration Add Errors"):
+                schedule3 = schedule3 + 1
+                print("Schedule 3 script has failed")
+        if schedule3 >= 3:
+            print("All schedules have failed")
+            mail.failure()
+        else:
+            print("Schedule 3 has succeeded")
+            mail.success()
+    else:
+        print("Program has suceeded")
+        mail.success()
 else:
     print("Program has succeeded")
     mail.success()
