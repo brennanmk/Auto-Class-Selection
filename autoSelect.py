@@ -1,14 +1,21 @@
 import selenium
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 
 # Change to cromedriver exe location
-driver = webdriver.Chrome(executable_path='C:/Users/brenn/OneDrive/Desktop/chromedriver.exe')
-driver.get("https://leopardweb.wit.edu")
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome(chrome_options=chrome_options)
 
+driver.get("https://leopardweb.wit.edu")
+print("Headless Driver Started")
 
 # Input login and requested CRN numbers
-username = ""
-password = ""
+username = "millerklugmanb"
+password = "#Bp02052"
 CRN1 = "22480"
 CRN2 = ""
 CRN3 = ""
@@ -61,3 +68,5 @@ id_box.send_keys(CRN6)
 
 # Final submit classes
 submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
+print("Script Completed")
+driver.save_screenshot("screenshot.png")
