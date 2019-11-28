@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import emailer.py as mail
 
 # Change to cromedriver exe location
 chrome_options = Options()
@@ -75,6 +76,8 @@ while counter <= 3:
 
 if counter == 3:
     print("Program has failed 3 times")
+    mail.failure()
 else:
     print("Program has succeeded")
+    mail.success()
 driver.close()
