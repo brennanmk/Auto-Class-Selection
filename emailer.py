@@ -30,7 +30,7 @@ def failure():
     FROM = 'brennanmk2200@gmail.com'
     to = 'brennanmk2200@gmail.com'
     subject = 'Script has failed'
-    text = 'Your classes have no been selected'
+    text = 'Your classes have not been selected, please re-run the script with new CRN numbers'
 
     message = """From: %s\nTo: %s\nSubject: %s\n\n%s
            """ % (FROM, ", ".join(to), subject, text)

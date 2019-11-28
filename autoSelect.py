@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import emailer.py as mail
+import emailer as mail
 
 # Change to cromedriver exe location
 chrome_options = Options()
@@ -13,15 +13,33 @@ driver.get("https://leopardweb.wit.edu")
 print("Headless Driver Started")
 counter = 1
 
-# Input login and requested CRN numbers
+# Input login
 username = "millerklugmanb"
 password = "#Bp02052"
+
+#Enter first CRN Schedule
 CRN1 = "22480"
 CRN2 = ""
 CRN3 = ""
 CRN4 = ""
 CRN5 = ""
 CRN6 = ""
+
+#Enter seceond set
+2CRN1 = "22480"
+2CRN2 = ""
+2CRN3 = ""
+2CRN4 = ""
+2CRN5 = ""
+2CRN6 = ""  
+
+#Enter 3rd schedule is applicable
+3CRN1 = "22480"
+3CRN2 = ""
+3CRN3 = ""
+3CRN4 = ""
+3CRN5 = ""
+3CRN6 = ""
 
 # Find username and enter username
 id_box = driver.find_element_by_name('username')
@@ -70,11 +88,11 @@ while counter <= 3:
 
     # Final submit classes
     submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
-    print("Script Completed")
     if driver.page_source.find("Registration Add Errors"):
         counter = counter+1
+        print("script has failed")
 
-if counter == 3:
+if counter >= 3:
     print("Program has failed 3 times")
     mail.failure()
 else:
