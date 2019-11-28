@@ -69,4 +69,5 @@ id_box.send_keys(CRN6)
 # Final submit classes
 submit_changes = driver.find_element_by_xpath("/html/body/div[3]/form/input[19]").click()
 print("Script Completed")
-driver.save_screenshot("screenshot.png")
+if(driver.page_source.find("Registration Add Errors")):
+    print("An error has occured")
