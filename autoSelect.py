@@ -15,7 +15,7 @@ CRN5 = ""
 CRN6 = ""
 
 # Enter seceond set
-second_CRN1 = "22480"
+second_CRN1 = ""
 second_CRN2 = ""
 second_CRN3 = ""
 second_CRN4 = ""
@@ -23,7 +23,7 @@ second_CRN5 = ""
 second_CRN6 = ""
 
 # Enter 3rd schedule is applicable
-third_CRN1 = "22480"
+third_CRN1 = ""
 third_CRN2 = ""
 third_CRN3 = ""
 third_CRN4 = ""
