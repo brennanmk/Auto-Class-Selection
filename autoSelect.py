@@ -1,13 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import emailer as mail
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Input login
 username = "millerklugmanb"
 password = "#Bp02052"
 
 # Enter first CRN Schedule
-CRN1 = "22480"
+CRN1 = "21857"
 CRN2 = ""
 CRN3 = ""
 CRN4 = ""
@@ -15,7 +16,7 @@ CRN5 = ""
 CRN6 = ""
 
 # Enter seceond set
-second_CRN1 = ""
+second_CRN1 = "21857"
 second_CRN2 = ""
 second_CRN3 = ""
 second_CRN4 = ""
@@ -40,7 +41,7 @@ chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-driver = webdriver.Chrome(chrome_options=chrome_options)
+driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=chrome_options)
 
 #navigate to leopardweb
 driver.get("https://leopardweb.wit.edu")
@@ -96,7 +97,9 @@ while schedule1 <= 3:
     if driver.page_source.find("Registration Add Errors"):
         schedule1 = schedule1 + 1
         print("Schedule 1 has failed")
-
+    else:
+        print("Schedule 1 was successful!")
+        break
 if schedule1 >= 3:
     print("Schedule 1 has failed to many times moving onto schedule 2:")
     while schedule2 <= 3:
@@ -122,6 +125,8 @@ if schedule1 >= 3:
         if driver.page_source.find("Registration Add Errors"):
             schedule2 = schedule2 + 1
             print("Schedule 2 has failed")
+        else:
+            break
     if schedule2 >= 3:
         print("Schedule 2 has failed to many times moving onto schedule 3:")
         while schedule3 <= 3:
@@ -147,6 +152,8 @@ if schedule1 >= 3:
             if driver.page_source.find("Registration Add Errors"):
                 schedule3 = schedule3 + 1
                 print("Schedule 3 has failed")
+            else:
+                break
         if schedule3 >= 3:
             print("ERROR: All schedules have failed, Sending warning email")
             mail.failure()
@@ -159,4 +166,6 @@ if schedule1 >= 3:
 else:
     print("Program has succeeded")
     mail.success()
+
 driver.close()
+driver.quit()
