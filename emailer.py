@@ -2,11 +2,11 @@ import smtplib
 
 
 def success():
-    gmail_user = 'brennanmk2200@gmail.com'
-    gmail_password = 'Bpm02052'
+    gmail_user = ''
+    gmail_password = ''
 
-    FROM = 'brennanmk2200@gmail.com'
-    to = 'brennanmk2200@gmail.com'
+    FROM = ''
+    to = ''
     subject = 'Script has completed'
     text = 'Your classes have been selected'
 
