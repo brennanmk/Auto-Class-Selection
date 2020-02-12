@@ -4,8 +4,8 @@ import emailer as mail
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Input login
-username = "millerklugmanb"
-password = "#Bp02052"
+username = ""
+password = ""
 
 # Enter first CRN Schedule
 CRN1 = "21857"
