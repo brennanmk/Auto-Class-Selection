@@ -24,11 +24,11 @@ def success():
 
 
 def failure():
-    gmail_user = 'brennanmk2200@gmail.com'
-    gmail_password = 'Bpm02052'
+    gmail_user = ''
+    gmail_password = ''
 
-    FROM = 'brennanmk2200@gmail.com'
-    to = 'brennanmk2200@gmail.com'
+    FROM = ''
+    to = ''
     subject = 'Script has failed'
     text = 'Your classes have not been selected, please re-run the script with new CRN numbers'
 
